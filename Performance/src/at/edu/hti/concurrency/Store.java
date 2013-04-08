@@ -2,6 +2,7 @@ package at.edu.hti.concurrency;
 
 public interface Store {
 
+	//Methoden fuer Beispiel 2
 	String getName();
 
 	void initMaxSize(int maxSize);
@@ -14,7 +15,7 @@ public interface Store {
 
 	int size();
 
-	
+	//Methoden fuer Beispiel 3
 	void registerListener(StoreEventListener listener);
 
 	boolean active();
@@ -22,7 +23,7 @@ public interface Store {
 	void shutDown();
 
 	
-	
+	//Methoden fuer Beispiel 4
 	void incProducer();
 
 	void decProducer();
