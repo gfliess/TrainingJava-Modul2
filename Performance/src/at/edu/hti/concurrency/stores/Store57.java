@@ -8,7 +8,7 @@ import at.edu.hti.concurrency.StoreEventListener;
 
 public class Store57 implements Store {
 
-	private List<String> list;
+	private List<String> list = new ArrayList<String>();
 	
 	@Override
 	public String getName() {
@@ -26,6 +26,8 @@ public class Store57 implements Store {
 	public void add(String data) {
 		if(data != null){
 			list.add(data);
+		}else{
+			throw new RuntimeException("data == null");
 		}
 	}
 
@@ -38,8 +40,9 @@ public class Store57 implements Store {
 	public String removeItem(int index) {
 		if(index < list.size()) {
 			return list.remove(index);
+		}else{
+			throw new RuntimeException("Index >= size");
 		}
-		return null;
 	}
 
 	@Override
