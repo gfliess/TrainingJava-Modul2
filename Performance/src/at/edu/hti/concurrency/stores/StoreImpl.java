@@ -1,50 +1,46 @@
 package at.edu.hti.concurrency.stores;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import at.edu.hti.concurrency.Store;
 import at.edu.hti.concurrency.StoreEventListener;
 
-public class Store57 implements Store {
-
-	private List<String> list;
+public class StoreImpl implements Store {
 	
+	private LinkedList<String> queue = new LinkedList<String>(); 
+
 	@Override
-	public String getName() {
-	  return this.getClass().getSimpleName();
+	public String getName() {	
+		return "StoreImpl";
 	}
 
 	@Override
 	public void initMaxSize(int maxSize) {
-		if(maxSize > 0){
-			list = new ArrayList<String>(maxSize);
-		}
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void add(String data) {
-		if(data != null){
-			list.add(data);
-		}
+		queue.addFirst(data);
+
 	}
 
 	@Override
 	public String remove() {
-		return list.remove(list.size()-1);
+		return queue.removeLast();
+		
 	}
 
 	@Override
 	public String removeItem(int index) {
-		if(index < list.size()) {
-			return list.remove(index);
-		}
-		return null;
+		return queue.remove(index);
 	}
 
 	@Override
 	public int size() {
-		return list.size();
+		return queue.size();
 	}
 
 	@Override
