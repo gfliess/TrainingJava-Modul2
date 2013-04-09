@@ -6,54 +6,56 @@ import java.util.List;
 import at.edu.hti.concurrency.Store;
 import at.edu.hti.concurrency.StoreEventListener;
 
-public class Store57 implements Store {
+public class StorePernerGrandlImpl implements Store {
 
-	private List<String> list = new ArrayList<String>();
+	final static int DEFAULT_MAXSIZE = 100;
+
+	Integer maxSize;
+	
+	List<String> storeItems;
+	
+	private List<String> getStoreItems() {
+		if( null == storeItems ) {
+			storeItems = new ArrayList<String>(maxSize != null ? maxSize : DEFAULT_MAXSIZE );
+		}
+		return storeItems;
+	}
 	
 	@Override
 	public String getName() {
-	  return this.getClass().getSimpleName();
+		return this.getClass().getSimpleName();
 	}
 
 	@Override
 	public void initMaxSize(int maxSize) {
-		if(maxSize > 0){
-			list = new ArrayList<String>(maxSize);
-		}
+		this.maxSize = new Integer(maxSize);
 	}
 
 	@Override
 	public void add(String data) {
-		if(data != null){
-			list.add(data);
-		}else{
-			throw new RuntimeException("data == null");
-		}
+		getStoreItems().add(data);
 	}
 
 	@Override
 	public String remove() {
-		return list.remove(list.size()-1);
+		return this.removeItem( 0 );
 	}
 
 	@Override
 	public String removeItem(int index) {
-		if(index < list.size()) {
-			return list.remove(index);
-		}else{
-			throw new RuntimeException("Index >= size");
-		}
+		List<String> list = getStoreItems();
+		return list.size() > index ? list.remove(index) : null;
 	}
 
 	@Override
 	public int size() {
-		return list.size();
+		return storeItems.size();
 	}
 
 	@Override
 	public void registerListener(StoreEventListener listener) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -65,19 +67,20 @@ public class Store57 implements Store {
 	@Override
 	public void shutDown() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void incProducer() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void decProducer() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
+	
 }
