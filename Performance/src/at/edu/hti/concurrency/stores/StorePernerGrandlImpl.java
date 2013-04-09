@@ -44,9 +44,7 @@ public class StorePernerGrandlImpl implements Store {
 	@Override
 	public String removeItem(int index) {
 		List<String> list = getStoreItems();
-		String removeItem = list.get( index );
-		list.remove( index );
-		return removeItem;
+		return list.size() > index ? list.remove(index) : null;
 	}
 
 	@Override
