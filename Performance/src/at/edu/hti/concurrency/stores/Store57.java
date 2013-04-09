@@ -12,7 +12,7 @@ public class Store57 implements Store {
 	
 	@Override
 	public String getName() {
-		return "Store57";
+	  return this.getClass().getSimpleName();
 	}
 
 	@Override
