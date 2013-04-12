@@ -9,9 +9,9 @@
 
 package at.edu.hti.concurrency.stores;
 
-import java.util.Collections;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import at.edu.hti.concurrency.Store;
@@ -29,8 +29,8 @@ public class ClagroWniStore implements Store {
   //some change 
 
   private static final String name = "[CLAGRO_WNI_STORE]";
-  private final Queue<StoreEventListener> listeners = Collections.asLifoQueue(new ConcurrentLinkedDeque<StoreEventListener>());
-  private final Queue<String> data = Collections.asLifoQueue(new ConcurrentLinkedDeque<String>());
+  private final List<StoreEventListener> listeners = new LinkedList<StoreEventListener>();
+  private final List<String> data = new ArrayList<String>();
   private final AtomicInteger producerCount = new AtomicInteger(0);
   private int maxSize;
 
@@ -72,14 +72,12 @@ public class ClagroWniStore implements Store {
 
   @Override
   public String remove() {
-    return this.data.remove();
+    return this.data.remove(data.size() - 1);
   }
 
   @Override
   public String removeItem(int index) {
-    String str = (String) data.toArray()[index];
-    data.remove(str);
-    return str;
+    return this.data.remove(index);
   }
 
   @Override
